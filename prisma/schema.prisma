@@ -30,13 +30,12 @@ model Chat {
 }
 
 model Message {
-  id       Int   @id @default(autoincrement())
-  author   User? @relation(fields: [authorId], references: [id])
-  authorId Int? // relation scalar field  (used in the `@relation` attribute above)
-
-  chat      Chat?    @relation(fields: [chatId], references: [id])
+  id        Int      @id @default(autoincrement())
+  authorId  Int?
   chatId    Int?
   content   String
   timestamp DateTime @default(now())
   own       Boolean?
+  chat      Chat?    @relation(fields: [chatId], references: [id])
+  author    User?    @relation(fields: [authorId], references: [id])
 }

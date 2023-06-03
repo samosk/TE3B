@@ -8,7 +8,7 @@ const UIDRand: UIDRandomizer = {
     }
 };
 // encrypts the password
-const Encrypter512: Encrypter = {
+export const Encrypter512: Encrypter = {
     hash(password: string, salt: string): string {
         return crypto.pbkdf2Sync(password, salt, 1000, 64, "sha512").toString("hex")
     }
