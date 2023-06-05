@@ -14,19 +14,22 @@ model Clicker {
 }
 
 model User {
-  id       Int       @id @unique @default(autoincrement())
-  salt     String    @unique
-  hash     String    @unique
-  session  String    @unique
-  username String    @unique
-  clicker  Clicker?
-  messages Message[]
+  id            Int       @id @unique @default(autoincrement())
+  salt          String    @unique
+  hash          String    @unique
+  session       String    @unique
+  username      String    @unique
+  clicker       Clicker?
+  messages      Message[] @relation("messages")
+  favoriteChats Chat[]    @relation("favoriteChats")
+  likes         Message[] @relation("likes")
 }
 
 model Chat {
-  id       Int       @id @unique @default(autoincrement())
-  name     String    @unique
-  messages Message[]
+  id          Int       @id @unique @default(autoincrement())
+  name        String    @unique
+  messages    Message[]
+  favoritedBy User[]    @relation("favoriteChats")
 }
 
 model Message {
@@ -36,6 +39,8 @@ model Message {
   content   String
   timestamp DateTime @default(now())
   own       Boolean?
-  author    User?    @relation(fields: [authorId], references: [id])
+  liked     Boolean?
   chat      Chat?    @relation(fields: [chatId], references: [id])
+  author    User?    @relation("messages", fields: [authorId], references: [id])
+  likedBy   User[]   @relation("likes")
 }

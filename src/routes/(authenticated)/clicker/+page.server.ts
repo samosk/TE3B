@@ -9,9 +9,15 @@ export const load: PageServerLoad = async ({ locals }) => {
     const clicks = await database.clicker.findUnique({
         where: { userId: user?.id },
     });
+    const users = await database.clicker.findMany({ where: { userId: user?.id } });
+
+    // users.sort((a: any, b: any) => a - b)
+    return { users: users.sort((a: any, b: any) => a - b), clicks: clicks?.clicks ?? 0 };
 
     return { clicks: clicks?.clicks ?? 0 };
 };
+
+
 
 export const actions: Actions = {
     click: async ({ locals, request }) => {
@@ -35,4 +41,16 @@ export const actions: Actions = {
             },
         });
     },
+    // leaderboard: async ({ locals }) => {
+
+    //     const user = await database.user.findUnique({
+    //         where: { session: locals.session },
+    //     });
+    //     const clicks = await database.clicker.findUnique({
+    //         where: { userId: user?.id },
+    //     });
+    //     const users = await database.user.findMany({ where: { clicker: clicks } });
+    //     // users.sort((a: any, b: any) => a - b)
+    //     return { users: users.sort((a: any, b: any) => a - b) }
+    // }
 };

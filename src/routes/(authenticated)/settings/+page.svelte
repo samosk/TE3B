@@ -8,15 +8,19 @@
 </script>
 
 <!-- <button class="btn btn-outline"><a href="./settings/credentials">Change Credentials</a></button> -->
-<a role="button" class="btn btn-outline" href="./settings/credentials">Change Credentials</a>
-
-<form method="POST" action="?/logout">
-	<button class="btn btn-outline">LOGOUT</button>
-</form>
-
-<form method="POST" action="?/deleteaccount">
-	<button class="btn btn-outline">DELETE ACCOUNT</button>
-	{#if form?.delete}
-		{form?.delete}
-	{/if}
-</form>
+<div class="flex items-center justify-center">
+	<div class="flex items-center justify-center">
+		<div class="flex flex-col space-y-4 items-center">
+			<a role="button" class="btn btn-outline" href="./settings/credentials">Change Credentials</a>
+			<form method="POST" action="?/logout">
+				<button class="btn btn-outline">LOGOUT</button>
+			</form>
+			<form method="POST" action="?/deleteaccount">
+				<button class="btn btn-error">DELETE ACCOUNT</button>
+				{#if form?.delete}
+					{form?.delete}
+				{/if}
+			</form>
+		</div>
+	</div>
+</div>
