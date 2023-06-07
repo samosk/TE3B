@@ -29,7 +29,7 @@
 			<div class="form-control flex-col space-y-8">
 				<div class="flex items-center justify-center">
 					<form use:enhance method="post" action="?/click">
-						<a role="button" class="btn btn-outline" type="submit" />
+						<button type="submit" class="btn btn-wide" />
 					</form>
 				</div>
 			</div>
